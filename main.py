@@ -6,39 +6,41 @@ from __future__ import print_function
 
 from instances import *
 from search import *
+import random
 
 def setup_problems(probleme_size, max_evaluations):
+    random_problem_size = random.choice(['small', 'medium', 'large'])
     
     return {
 
         # Espaces discrets
         
         'knapsac' : generate_knapsac_instance(
-            probleme_size, max_evaluations), 
+            probleme_size, max_evaluations) if probleme_size != 'random' else generate_knapsac_instance(probleme_size, max_evaluations, size=random.randint(10,40), vol=random.randint(40,150)),
         'set_covering' : generate_set_covering_instance(
-            probleme_size, max_evaluations),
+            probleme_size, max_evaluations) if probleme_size != 'random' else generate_set_covering_instance(probleme_size, max_evaluations, size=random.randint(5,50), nb_sub=random.randint(5,50)),
         'tsp' : generate_tsp_instance(
             probleme_size, max_evaluations),
 
         # Fonction test discretes
         
         'onemax': generate_binary_test_function_instance(
-            OneMax, probleme_size, max_evaluations),
+            OneMax, probleme_size, max_evaluations) if probleme_size != 'random' else generate_binary_test_function_instance(OneMax, random_problem_size, max_evaluations),
         'leadingones' : generate_binary_test_function_instance(
-            LeadingOnes, probleme_size, max_evaluations),
+            LeadingOnes, probleme_size, max_evaluations) if probleme_size != 'random' else generate_binary_test_function_instance(LeadingOnes, random_problem_size, max_evaluations),
         'binval' : generate_binary_test_function_instance(
-            BinVal, probleme_size, max_evaluations),
+            BinVal, probleme_size, max_evaluations) if probleme_size != 'random' else generate_binary_test_function_instance(BinVal, random_problem_size, max_evaluations),
 
         # Expace continus (fonctions test)
     
         'sphere' : generate_continuous_test_function_instance(
-            Sphere, probleme_size, max_evaluations),
+            Sphere, probleme_size, max_evaluations) if probleme_size != 'random' else generate_continuous_test_function_instance(Sphere, random_problem_size, max_evaluations),
         'rosenbrock' : generate_continuous_test_function_instance(
-            Rosenbrock, probleme_size, max_evaluations),
+            Rosenbrock, probleme_size, max_evaluations) if probleme_size != 'random' else generate_continuous_test_function_instance(Rosenbrock, random_problem_size, max_evaluations),
         'sharpridge' : generate_continuous_test_function_instance(
-            SharpRidge, probleme_size, max_evaluations),
+            SharpRidge, probleme_size, max_evaluations) if probleme_size != 'random' else generate_continuous_test_function_instance(SharpRidge, random_problem_size, max_evaluations),
         'tablet' : generate_continuous_test_function_instance(
-            Tablet, probleme_size, max_evaluations),    
+            Tablet, probleme_size, max_evaluations) if probleme_size != 'random' else generate_continuous_test_function_instance(Tablet, random_problem_size, max_evaluations),
     }
    
     
@@ -76,7 +78,7 @@ if __name__ == '__main__':
     # Choix des aramètre globaux, a modifier selon la taille des problèmes  
     ############################################################# 
     
-    probleme_size   = 'medium' # 'small', 'medium', 'large' or 'random'
+    probleme_size   = 'm' # 'small', 'medium', 'large' or 'random'
      
     max_evaluations = 5000  # Les critères d'arrêt 
     max_iterations  = 5000
@@ -92,6 +94,7 @@ if __name__ == '__main__':
     
     algo_list = [    # Liste des algorithmes lancés (le nom des classes)
         RandomLS,
+        HillClimbingLS
     ]
 
     algo_options = { # Paramètres spécifiques aux algorithmes. Ce dictionnaire 
@@ -111,7 +114,7 @@ if __name__ == '__main__':
     ############################################################################
     all_problems = setup_problems(probleme_size, max_evaluations) # la liste complète 
     
-    problem = all_problems ['knapsac']
+    problem = all_problems ['onemax']
     
      
     #

@@ -54,11 +54,11 @@ class LocalSearchAlgorithm(OneSolutionAlgorithm):
      
     def select_next_solution(self, candidates):
         """
-        Retourne une solutions, peut-être pas.
+        Retourne une solution, peut-être pas.
         Dépend du probleme et de l'algo 
         
         prend une liste d'instances de Solution 
-        retourne une instances de Solution ou None si pas de solution
+        retourne une instance de Solution ou None si pas de solution
         """
         raise NotImplementedError
     

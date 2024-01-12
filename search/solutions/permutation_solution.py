@@ -15,11 +15,11 @@ class PermutationSolution(Solution):
     def __init__(self, dim=None, x=None):
         Solution.__init__(self, dim, x)
         if x is None :
-            self._sol = np.zeros(dim, dtype=np.int)
+            self._sol = np.zeros(dim, dtype=np.int32)
 
     def random(self):
         """ Retourne une solution aléatoire """
-        rnd = np.arange(self.dim, dtype=np.int)
+        rnd = np.arange(self.dim, dtype=np.int32)
         np.random.shuffle(rnd)
         return PermutationSolution(x=rnd)
         
