@@ -23,10 +23,6 @@ class RandomES(EvolutionStrategy):
         #           dans main.py
         #
         
-        self._mu = 5
-        self._lambda = 10
-        self._sigma = 1.0
-        
         # ATTENTION : Quelque étapes dans ce code ne sont pas nécessaires, 
         #             elles sont là pour illustrer comment le faire pour
         #             les autres instance des algorithme.

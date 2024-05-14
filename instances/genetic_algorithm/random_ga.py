@@ -19,7 +19,11 @@ class RandomGA(PopulationSearchAlgorithm):
         * Un dictionnaire des paramètres des algorithmes 
 
         """
-        PopulationSearchAlgorithm.__init__(self, prob, options)
+        super().__init__(prob, options)
+
+    @property
+    def name(self):
+        return "RandomGA µ{}_λ{}".format(self._mu, self._lambda).replace('.',',')
 
     def _select_one_random(self, pool):
         """

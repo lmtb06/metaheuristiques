@@ -72,7 +72,7 @@ class Algorithm(object):
             raise TypeError("v1 et v2 doivent être des Solutions ou float.")
 
 
-    def compare (self, x1, x2) :
+    def compare (self, v1, v2) :
         """
         Comparaison pour le fonctions de tri en fonction du context 
         minimisation ou maximisation 
@@ -199,10 +199,7 @@ class ManySolutionAlgorithm(Algorithm) :
 
     def print_step(self):
         """ retourne des infos sur l'itération  """
-        return "eval:{} val:{} max:{} min:{} [{}]".format(
-            self._problem.nb_evaluations,
-            self.ave_value, self.max_value, self.min_value,
-            self._print_dist())
+        return f"eval:{self._problem.nb_evaluations}  mu:{self._mu} lambda:{self._lambda} val:{self.ave_value} max:{self.max_value} min:{self.min_value} [{self._print_dist()}]"
     
     def _print_dist(self):
         """ Pour afficher graphiqument les stats """

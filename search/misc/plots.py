@@ -110,7 +110,24 @@ def draw_stars(d1, d2, ax, i, j,
     ax.text(mid[0], mid[1], stars(p*2.0), **kwargs)   
 
     
+def clean_data_stuff(data_stuff):
+    """
+    Delete all abnormal values from data_stuff (infinite, NaN, ...)
+    """
+    clean_data_stuff = []
+    for s in data_stuff:
+        # Convertir s en un array numpy pour faciliter le nettoyage
+        s_array = np.array(s)
+        # Supprime les valeurs infinies ou NaN
+        s_array = s_array[~np.isinf(s_array)]
 
+        # Ajouter le tableau nettoyé à la liste
+        clean_data_stuff.append(s_array)
+    if len(clean_data_stuff) != len(data_stuff):
+        print("Warning: some data was removed from the boxplot")
+    return clean_data_stuff
+        
+        
     
 def plot_boxplot(axes, data_stuff, labels=[]):
     """
@@ -121,7 +138,7 @@ def plot_boxplot(axes, data_stuff, labels=[]):
     data_stuff = [ [ ... ] ... [ ... ] ] 
     
     """
-        
+    data_stuff = clean_data_stuff(data_stuff)
     # manage padding
     y_max = max(data_stuff[0])
     y_min = min(data_stuff[0])

@@ -9,7 +9,7 @@ class RandomLS(LocalSearchAlgorithm):
     def __init__(self, prob, options):
         """ Constructeur de la super classe 
         """
-        LocalSearchAlgorithm.__init__(self, prob, options)
+        super().__init__(prob, options)
    
     def get_neighbors(self):
         """ retourner les voisins de la solution courante 

@@ -247,14 +247,14 @@ def multiple_runs(problem, algo_class_name,  max_iter, nb_runs, alg_options,
     print ("-"*80)
 
     # Réaliser les courbes pour chaque exécution
-    plot_by_evaluation(iter_data, 'eval', 'val',\
-                       "{}-{}.png".format(algorithm.name, 'val'))
-    for s_name in extra_stats :
-        try : 
-            plot_by_evaluation(iter_data, 'eval', s_name,\
-                               "{}-{}.png".format(algorithm.name, s_name))
-        except ValueError :
-            pass
+    # plot_by_evaluation(iter_data, 'eval', 'val',\
+    #                    "{}-{}-{}.png".format(problem.name,algorithm.name, 'val'))
+    # for s_name in extra_stats :
+    #     try : 
+    #         plot_by_evaluation(iter_data, 'eval', s_name,\
+    #                            "{}-{}-{}.png".format(problem.name,algorithm.name, s_name))
+    #     except ValueError :
+    #         pass
     
     # retourner les valeur des solution final et le nom de l'algorithme 
     return np.array(final_data), algorithm.name

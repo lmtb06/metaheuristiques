@@ -126,7 +126,7 @@ class BinVal(BinaryFunctionProblem) :
             raise TypeError("x must be a instance of BinarySolution")
         
         self.nb_evaluations += 1
-        x = np.array(sol.solution, dtype=np.int)
+        x = np.array(sol.solution, dtype=np.int32)
         
         val = 0
         for i in range(len(x)):

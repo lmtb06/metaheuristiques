@@ -71,7 +71,9 @@ class PopulationSearchAlgorithm(ManySolutionAlgorithm):
         # mise a jour des statistiques
         self.update_stats( self._pop )
         
-        return self.stop() 
+        return self.stop()
+
+    
         
     
    
