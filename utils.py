@@ -209,7 +209,7 @@ def execute_and_save_stats(
         extra_stats=[],
         verbose=False,
         algo_list=[RandomLS],
-        problems_name=['binval']):
+        problems_name=['binval'], save=True):
     """
     Exécute les algorithmes sur les problèmes et sauvegarde les statistiques dans des fichiers CSV.
     """
@@ -225,17 +225,18 @@ def execute_and_save_stats(
         )
 
         # Sauvegarde des statistiques
-        for problem_name, problem_stats in stats[i].items():
-            for algo_name, algo_stats in problem_stats.items():
-                # ajoute un header si le fichier n'existe pas
-                nom_fichier = f"data/{algo_name}-{problem_name}-{problem_size}.csv"
-                exist = not os.path.exists(nom_fichier)
-                if not exist:
-                    previous_stats = pd.read_csv(nom_fichier)
-                    run = previous_stats['run'].max() + 1
-                    algo_stats['run'] += run
-                    algo_stats = pd.concat([previous_stats, algo_stats],ignore_index=True, sort=False)
-                algo_stats.to_csv(nom_fichier, mode='w', header=True, index=False)
+        if save:
+            for problem_name, problem_stats in stats[i].items():
+                for algo_name, algo_stats in problem_stats.items():
+                    # ajoute un header si le fichier n'existe pas
+                    nom_fichier = f"data/{algo_name}-{problem_name}-{problem_size}.csv"
+                    exist = not os.path.exists(nom_fichier)
+                    if not exist:
+                        previous_stats = pd.read_csv(nom_fichier)
+                        run = previous_stats['run'].max() + 1
+                        algo_stats['run'] += run
+                        algo_stats = pd.concat([previous_stats, algo_stats],ignore_index=True, sort=False)
+                    algo_stats.to_csv(nom_fichier, mode='w', header=True, index=False)
         # Aggrégation des statistiques
         for problem_name, stat in stats[i].items():
             for algo_name, algo_stat in stat.items():
